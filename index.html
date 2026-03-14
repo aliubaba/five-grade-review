@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五年级知识复习乐园</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>🎓 五年级知识复习乐园</h1>
+            <div class="user-info">
+                <div class="level-badge">
+                    <span class="level-icon">⭐</span>
+                    <span class="level-text">Lv.<span id="userLevel">1</span></span>
+                </div>
+                <div class="points-display">
+                    <span class="points-icon">💎</span>
+                    <span id="userPoints">0</span>
+                </div>
+                <div class="streak-display">
+                    <span class="streak-icon">🔥</span>
+                    <span id="userStreak">0</span>天
+                </div>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <button class="nav-btn active" data-tab="home">🏠 首页</button>
+            <button class="nav-btn" data-tab="chinese">📚 语文</button>
+            <button class="nav-btn" data-tab="math">🔢 数学</button>
+            <button class="nav-btn" data-tab="english">🔤 英语</button>
+            <button class="nav-btn" data-tab="achievements">🏆 成就</button>
+            <button class="nav-btn" data-tab="profile">👤 个人中心</button>
+        </nav>
+
+        <main class="main-content">
+            <section id="home" class="tab-content active">
+                <div class="welcome-section">
+                    <h2>欢迎回来，小勇士！</h2>
+                    <p>今天也要加油学习哦！</p>
+                </div>
+
+                <div class="daily-mission">
+                    <h3>📋 今日任务</h3>
+                    <div id="dailyTasks"></div>
+                </div>
+
+                <div class="progress-overview">
+                    <h3>📊 学习进度</h3>
+                    <div class="subject-progress">
+                        <div class="progress-item">
+                            <span class="subject-name">语文</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="chineseProgress" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-percent" id="chinesePercent">0%</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="subject-name">数学</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="mathProgress" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-percent" id="mathPercent">0%</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="subject-name">英语</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="englishProgress" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-percent" id="englishPercent">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="action-btn" onclick="startRandomLesson()">🎲 随机一课</button>
+                    <button class="action-btn" onclick="showReviewMode()">📝 复习模式</button>
+                    <button class="action-btn" onclick="showChallengeMode()">⚔️ 挑战模式</button>
+                </div>
+            </section>
+
+            <section id="chinese" class="tab-content">
+                <div class="subject-header">
+                    <h2>📚 语文</h2>
+                    <div class="subject-stats">
+                        <span>已完成: <strong id="chineseCompleted">0</strong>/<span id="chineseTotal">0</span></span>
+                    </div>
+                </div>
+                <div id="chineseLessons" class="lessons-container"></div>
+            </section>
+
+            <section id="math" class="tab-content">
+                <div class="subject-header">
+                    <h2>🔢 数学</h2>
+                    <div class="subject-stats">
+                        <span>已完成: <strong id="mathCompleted">0</strong>/<span id="mathTotal">0</span></span>
+                    </div>
+                </div>
+                <div id="mathLessons" class="lessons-container"></div>
+            </section>
+
+            <section id="english" class="tab-content">
+                <div class="subject-header">
+                    <h2>🔤 英语</h2>
+                    <div class="subject-stats">
+                        <span>已完成: <strong id="englishCompleted">0</strong>/<span id="englishTotal">0</span></span>
+                    </div>
+                </div>
+                <div id="englishLessons" class="lessons-container"></div>
+            </section>
+
+            <section id="achievements" class="tab-content">
+                <h2>🏆 成就系统</h2>
+                <div id="achievementsList" class="achievements-grid"></div>
+            </section>
+
+            <section id="profile" class="tab-content">
+                <h2>👤 个人中心</h2>
+                <div class="profile-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-value" id="profileLevel">1</div>
+                        <div class="stat-label">等级</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💎</div>
+                        <div class="stat-value" id="profilePoints">0</div>
+                        <div class="stat-label">积分</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-value" id="profileStreak">0</div>
+                        <div class="stat-label">连续学习</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-value" id="profileLessons">0</div>
+                        <div class="stat-label">完成课程</div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="action-btn" onclick="resetProgress()">⚠️ 重置进度</button>
+                </div>
+            </section>
+        </main>
+
+        <div id="lessonModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="lessonTitle">课程标题</h2>
+                    <button class="close-btn" onclick="closeLessonModal()">✕</button>
+                </div>
+                <div class="modal-body" id="lessonContent"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeLessonModal()">返回</button>
+                    <button class="btn btn-primary" onclick="completeLesson()">完成课程 (+10💎)</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="rewardModal" class="modal">
+            <div class="modal-content reward-modal">
+                <div class="reward-animation">🎉</div>
+                <h2 id="rewardTitle">恭喜！</h2>
+                <p id="rewardMessage">你获得了奖励！</p>
+                <div id="rewardDetails"></div>
+                <button class="btn btn-primary" onclick="closeRewardModal()">太棒了！</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
